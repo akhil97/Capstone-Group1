@@ -45,29 +45,6 @@ def get_tiff_files(base_dir):
                 tiff_files.append(os.path.join(dirpath, filename))
     return tiff_files
 
-
-# Function to directly get coordinates from raster using rasterio
-def get_raster_coordinates(file_path):
-    """
-    Get coordinates from raster using rasterio.
-    Args:
-        file_path (str): Path to the raster file.
-    Returns:
-        (np.array, np.array): Arrays of x and y coordinates.
-    """
-    with rio.open(file_path) as src:
-        # Read the raster values
-        array = src.read(1)
-
-        # Get the affine transform for the raster
-        transform = src.transform
-
-        # Generate coordinates for all pixels
-        rows, cols = np.indices(array.shape)
-        xs, ys = rio.transform.xy(transform, rows, cols)
-
-        return np.array(xs), np.array(ys)
-
 def main(base_dir, resampling_factor, output_dir):
     """
     Main function to process TIFF files.
@@ -97,10 +74,6 @@ def main(base_dir, resampling_factor, output_dir):
                     output_file = os.path.join(output_dir, f'resampled_{i}.tif')
                     resampled_data.rio.to_raster(output_file)
                     logging.info(f"Saved resampled data to {output_file}")
-
-                    # Get and log coordinates for each file
-                    xs, ys = get_raster_coordinates(tiff_files[i])
-                    logging.info(f"Coordinates obtained for {tiff_files[i]}")
 
                 except Exception as e:
                     logging.error(f"Error in processing file {tiff_files[i]}: {e}")
