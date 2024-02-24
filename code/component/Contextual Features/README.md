@@ -1,1 +1,2 @@
+# Resampling of Raster Images from 10m to 100m Resolution
 The provided Python script resamples raster images, specifically TIFF files, from a 10m resolution to a 100m resolution. It achieves this by setting a resampling factor of 0.1, effectively reducing the pixel density to one-tenth of the original. The resampling is done using bilinear interpolation, which helps maintain data continuity in the newly scaled images. The script scans a specified directory for TIFF files, processes each file by resampling it, and saves the resampled output in a new file.
