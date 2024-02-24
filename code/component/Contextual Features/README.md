@@ -7,5 +7,5 @@ The Python script resamples raster images, specifically a total of 144 TIFF file
 The Python script extracts contextual features from 144 resampled TIFF raster files and converts them to CSV format. It retrieves geographical coordinates from each raster, adjusts these coordinates for a westward and northward shift of approximately 1000 meters, and samples the raster values at these new locations. The extracted data, comprising longitude, latitude, and raster values, is then saved as CSV files, with each file corresponding to a raster image. 
 
 # Merging Contextual Features
-## merging_contextual_feature
+## merging_contextual_feature.py
 The Python script streamlines the merging of multiple CSV files into one, focusing on combining raster value data with geographical coordinates. It first establishes a base dataframe using longitude and latitude from the first CSV file in the specified directory. The script then iterates through each CSV file, extracting and storing the 'Raster Value' column in a dictionary. These values are concatenated and merged with the base dataframe to create a comprehensive dataset that aligns raster values with corresponding coordinates. Finally, the merged data is saved into a new CSV file.
