@@ -1,42 +1,54 @@
 import sys
 import os
-import numpy as np
-import rioxarray
-from osgeo import gdal, ogr
-import rasterio as rio
+import rasterio
+from rasterio.enums import Resampling
 import logging
 from concurrent.futures import ProcessPoolExecutor
 
 # Setup basic logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def read_and_resample_raster(file_path, resampling_factor):
+def read_and_resample_raster(file_path, resampling_factor, resampling_method=Resampling.bilinear):
     """
     Load raster data and resample it.
     Args:
         file_path (str): Path to the raster file.
-        resampling_factor (int): Factor by which to resample the raster.
+        resampling_factor (float): Factor by which to resample the raster.
+        resampling_method (Resampling): Method used for resampling.
     Returns:
-        resampled_dataset: Resampled raster dataset.
+        Tuple of resampled data and its transformation.
     """
     try:
-        with rioxarray.open_rasterio(file_path) as dataset:
-            resampled_dataset = dataset.rio.reproject(
-                dataset.rio.crs,
-                resolution=(resampling_factor, resampling_factor)
+        with rasterio.open(file_path) as dataset:
+            new_height = int(dataset.height * resampling_factor)
+            new_width = int(dataset.width * resampling_factor)
+
+            # Accessing the dtype from the read method
+            resampled_data = dataset.read(
+                out_shape=(
+                    dataset.count,
+                    new_height,
+                    new_width
+                ),
+                resampling=resampling_method
             )
-            return resampled_dataset
+
+            dtype = resampled_data.dtype
+
+            transform = dataset.transform * dataset.transform.scale(
+                (dataset.width / new_width),
+                (dataset.height / new_height)
+            )
+
+            return resampled_data, dataset.count, dtype, dataset.crs, transform
+
     except Exception as e:
         logging.error(f'Error reading and resampling raster {file_path}: {e}')
-        raise
+        return None
 
 def get_tiff_files(base_dir):
     """
     Get TIFF files from subdirectories.
-    Args:
-        base_dir (str): Base directory to search for TIFF files.
-    Returns:
-        tiff_files (list): List of paths to TIFF files.
     """
     tiff_files = []
     for dirpath, _, filenames in os.walk(base_dir):
@@ -45,65 +57,52 @@ def get_tiff_files(base_dir):
                 tiff_files.append(os.path.join(dirpath, filename))
     return tiff_files
 
-
-# Function to directly get coordinates from raster using rasterio
-def get_raster_coordinates(file_path):
+def process_file(file_path, resampling_factor, output_dir):
     """
-    Get coordinates from raster using rasterio.
-    Args:
-        file_path (str): Path to the raster file.
-    Returns:
-        (np.array, np.array): Arrays of x and y coordinates.
+    Process a single file.
     """
-    with rio.open(file_path) as src:
-        # Read the raster values
-        array = src.read(1)
-
-        # Get the affine transform for the raster
-        transform = src.transform
-
-        # Generate coordinates for all pixels
-        rows, cols = np.indices(array.shape)
-        xs, ys = rio.transform.xy(transform, rows, cols)
-
-        return np.array(xs), np.array(ys)
+    try:
+        result = read_and_resample_raster(file_path, resampling_factor)
+        if result:
+            resampled_data, count, dtype, crs, transform = result
+            output_file = os.path.join(output_dir, f'resampled_{os.path.basename(file_path)}')
+            with rasterio.open(
+                output_file,
+                'w',
+                driver='GTiff',
+                height=resampled_data.shape[1],
+                width=resampled_data.shape[2],
+                count=count,
+                dtype=dtype,
+                crs=crs,
+                transform=transform,
+            ) as dst:
+                dst.write(resampled_data)
+            logging.info(f"Saved resampled data to {output_file}")
+    except Exception as e:
+        logging.error(f"Error in processing file {file_path}: {e}")
 
 def main(base_dir, resampling_factor, output_dir):
     """
     Main function to process TIFF files.
-    Args:
-        base_dir (str): Base directory containing TIFF files.
-        resampling_factor (int): Factor by which to resample the raster.
-        output_dir (str): Directory where the output files will be saved.
     """
     try:
-        # Ensure output directory
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
 
         tiff_files = get_tiff_files(base_dir)
         logging.info(f"Found {len(tiff_files)} TIFF files to process.")
 
-        with ProcessPoolExecutor() as executor:
-            futures = []
-            for i, tiff_file in enumerate(tiff_files):
-                logging.info(f"Submitting file {tiff_file} for resampling.")
-                future = executor.submit(read_and_resample_raster, tiff_file, resampling_factor)
-                futures.append(future)
+        with ProcessPoolExecutor(max_workers=4) as executor:
+            futures = {executor.submit(process_file, file_path, resampling_factor, output_dir): file_path for file_path in tiff_files}
 
-            for i, future in enumerate(futures):
+            for future in futures:
+                file_path = futures[future]
                 try:
-                    resampled_data = future.result()
-                    output_file = os.path.join(output_dir, f'resampled_{i}.tif')
-                    resampled_data.rio.to_raster(output_file)
-                    logging.info(f"Saved resampled data to {output_file}")
-
-                    # Get and log coordinates for each file
-                    xs, ys = get_raster_coordinates(tiff_files[i])
-                    logging.info(f"Coordinates obtained for {tiff_files[i]}")
-
+                    future.result()
+                    logging.info(f"Completed processing of {file_path}")
                 except Exception as e:
-                    logging.error(f"Error in processing file {tiff_files[i]}: {e}")
+                    logging.error(f"Error in processing file {file_path}: {e}")
 
     except Exception as e:
         logging.error(f"Error in main function: {e}")
@@ -111,12 +110,9 @@ def main(base_dir, resampling_factor, output_dir):
 
 if __name__ == '__main__':
     base_dir = '/home/ubuntu/Cap2024/context/lagos_contextual_10m'
-    resampling_factor = 100
+    resampling_factor = 0.1
     output_dir = '/home/ubuntu/Cap2024/context/resampled_data'
     main(base_dir, resampling_factor, output_dir)
-
-
-
 
 
 
