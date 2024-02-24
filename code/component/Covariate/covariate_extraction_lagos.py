@@ -1,47 +1,55 @@
-import os
-# os.system("sudo pip install geopandas")
-# os.system("sudo pip install rasterio")
-#import geopandas as gpd
 import rasterio
-import numpy as np
 import pandas as pd
-from rasterio.plot import show, show_hist
+import multiprocessing
+from itertools import product
 
-############################################# COVARIATE DATA EXTRACTION ##############################################
+def process(row, src_path, num_bands):
+    data_list = []
+    with rasterio.open(src_path) as src:
+        for col in range(src.width):
+            pixel_values = []
+            for band in range(1, num_bands + 1):
+                value = src.read(band, window=((row, row + 1), (col, col + 1))).flatten()[0]
+                if value != src.nodatavals[band - 1]:
+                    pixel_values.append(value)
+                else:
+                    pixel_values.append(float('NaN'))
 
-LABEL_PATH = r'lag_covariate_compilation_53bands_clip.tif'
+            lon, lat = src.xy(row, col)
+            data_list.append([lon, lat] + pixel_values)
+    return data_list
 
-# Basic exploration and meta data
-map_data = rasterio.open(LABEL_PATH)
+def main():
+    tiff_path = "/home/ubuntu/Cap2024/covariate/lag_covariate_compilation_53bands_clip.tif"
+    output_csv_path = "/home/ubuntu/Cap2024/covariate/Covariate_Features.csv"
 
-# Read data from training tif and extract log, lat and label
-for i in range(1, 54):
-    band_data = map_data.read(i)
-    no_data = map_data.nodata
+    try:
+        with rasterio.open(tiff_path) as src:
+            num_bands = src.count
+            pool = multiprocessing.Pool(processes=multiprocessing.cpu_count())
 
-    # Calculate the coordinates for the entire array once
-    rows, cols = band_data.shape
-    x_coords, y_coords = map_data.transform * np.meshgrid(np.arange(cols), np.arange(rows), indexing='xy')
+            results = pool.starmap(process, [(row, tiff_path, num_bands) for row in range(src.height)])
+            pool.close()
+            pool.join()
 
-    # Extracting data
-    data = [{'long': x_coords[x, y], 'lat': y_coords[x, y], 'Band_{}'.format(i): band_data[x, y]}
-            for x, y in np.ndindex(band_data.shape)
-            if band_data[x, y] != no_data]
+            # Flatten the list of results
+            flat_results = [item for sublist in results for item in sublist]
 
-    # Create DataFrame and save to CSV
-    df = pd.DataFrame(data)
-    print(len(df))
-    df.to_csv('covariate_band_{}.csv'.format(i), index=False)
+            # Create a DataFrame
+            data_df = pd.DataFrame(flat_results, columns=['Longitude', 'Latitude'] + [f'Band_{i + 1}' for i in range(num_bands)])
+            print(f"Total number of data points extracted: {len(data_df)}")
 
-# Merge data from all bands into a single DataFrame
-merged_df = None
-for i in range(1, 54):
-    band_df = pd.read_csv(f'covariate_band_{i}.csv')
+            # Save the DataFrame to CSV
+            data_df.to_csv(output_csv_path, index=False)
 
-    if merged_df is None:
-        merged_df = band_df
-    else:
-        merged_df = pd.merge(merged_df, band_df, on=['long', 'lat'])
+    except rasterio.errors.RasterioIOError as e:
+        print(f"Error opening the TIFF file: {e}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
-# Save the merged DataFrame to a CSV file
-merged_df.to_csv('covariate_feature.csv', index=False)
+if __name__ == "__main__":
+    main()
+
+
+
+
