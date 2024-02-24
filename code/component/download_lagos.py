@@ -2,7 +2,7 @@ import os
 import shutil
 
 # get your local directory
-city_name = 'lagos'
+city_name = 'nairobi'
 
 # Get your local directory and create a folder with the city name
 local_dir = os.getcwd()
@@ -66,4 +66,4 @@ check_local_dir(local_dir)
 
 #change to correct folder if needed
 # for accra data change to this '/home/ubuntu/accra'
-remote_dir = '/home/ubuntu/Capstone/lagos'
+remote_dir = '/home/ubuntu/Capstone/nairobi'
