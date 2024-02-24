@@ -1,3 +1,3 @@
-# Covariate Extraction
-## Extracting Covariate Bands from a Clip Tiff File
+# Extraction of Covariate Bands from a Clipped RBG TIFF file
+## covairate_extraction.py
 The Python script extracts covariate band data from a clip RBG TIFF file and organizes it into a CSV format. The script iterates through each pixel in every band (a total of 53 band data), extracting pixel values and replacing missing data with NaN. It also retrieves geographical coordinates for each pixel. The extracted data, including longitude, latitude, and band values, are flattened into a single list and converted into a pandas DataFrame. This DataFrame, representing each pixel's data, is then saved as a CSV file for easy access and analysis.
