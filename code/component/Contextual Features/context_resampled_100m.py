@@ -111,7 +111,7 @@ def main(base_dir, resampling_factor, output_dir):
 if __name__ == '__main__':
     base_dir = '/home/ubuntu/Cap2024/context/lagos_contextual_10m'
     resampling_factor = 0.1
-    output_dir = '/home/ubuntu/Cap2024/context/resampled_data'
+    output_dir = '/home/ubuntu/Cap2024/context/resampled_data11'
     main(base_dir, resampling_factor, output_dir)
 
 
