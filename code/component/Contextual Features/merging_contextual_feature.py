@@ -5,7 +5,6 @@ import logging
 # Setup basic logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-
 def merge_csv_files(directory, output_filename):
     try:
         # Dictionary to hold data from each CSV file with the filename as key
@@ -34,16 +33,18 @@ def merge_csv_files(directory, output_filename):
         # Join the base_df with the raster values dataframe
         merged_df = base_df.join(raster_values_df)
 
-        # Save the merged dataframe to a new CSV file
-        merged_df.to_csv(output_filename, index=False)
-        logging.info(f'Merged files into {output_filename}')
+        # Remove rows with any NaN value
+        cleaned_df = merged_df.dropna()
+
+        # Save the cleaned dataframe to a new CSV file
+        cleaned_df.to_csv(output_filename, index=False)
+        logging.info(f'Merged and cleaned files into {output_filename}')
 
     except Exception as e:
         logging.error(f"Error occurred: {e}")
 
 if __name__ == '__main__':
-    # Specify the directory containing CSV files and the output file name
     directory = '/home/ubuntu/Cap2024/context/contextual_features_extraction'
-    output_filename = '/home/ubuntu/Cap2024/context/merged_file.csv'
+    output_filename = '/home/ubuntu/Cap2024/context/merged_contextual_features.csv'
     merge_csv_files(directory, output_filename)
 
