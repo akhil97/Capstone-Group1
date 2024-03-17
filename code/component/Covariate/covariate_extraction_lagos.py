@@ -14,6 +14,8 @@ LABEL_PATH = r'../../../Data/lag_covariate_compilation_53bands.tif'
 # Basic exploration and meta data
 map_data = rasterio.open(LABEL_PATH)
 
+gdf = gpd.GeoDataFrame()
+
 # Read data from training tif and extract log, lat and label
 for i in range(1, 54):
     band_data = map_data.read(i)
@@ -34,22 +36,30 @@ for i in range(1, 54):
     #print(len(df))
     long = [data[i]['long'] for i in range(len(data))]
     lat = [data[i]['lat'] for i in range(len(data))]
+    cov_bands = data[i]['Band_{}'.format(i)]
 
-    gdf = gpd.GeoDataFrame(
+    col_name = f'Band_{i}'
+
+    coordinates = gpd.GeoDataFrame(
         df, geometry=gpd.points_from_xy(long, lat), crs="ESRI:54009"
     )
-    print(gdf.geometry)
-    #df.to_csv('covariate_band_{}.csv'.format(i), index=False)
 
+    gdf['geometry'] = coordinates['geometry']
+    gdf[col_name] = cov_bands
+    #gdf.to_csv('covariate_band_{}.csv'.format(i), index=False)
+    #print(gdf.head())
+
+print(gdf.head())
 # Merge data from all bands into a single DataFrame
-merged_df = None
-for i in range(1, 54):
-    band_df = pd.read_csv(f'covariate_band_{i}.csv')
+#merged_df = None
+#for i in range(1, 54):
+#    band_df = pd.read_csv(f'covariate_band_{i}.csv')
 
-    if merged_df is None:
-        merged_df = band_df
-    else:
-        merged_df = pd.merge(merged_df, band_df, on=['long', 'lat'])
+#    if merged_df is None:
+#        merged_df = band_df
+#    else:
+#        merged_df = pd.merge(merged_df, band_df, on=['geometry'])
 
 # Save the merged DataFrame to a CSV file
-merged_df.to_csv('../../../Data/covariate_feature.csv', index=False)
+#merged_df.to_csv('../../../Data/Covariate_Features.csv', index=False)
+#print(merged_df.head())
