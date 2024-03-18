@@ -36,7 +36,7 @@ for i in range(1, 54):
     #print(len(df))
     long = [data[i]['long'] for i in range(len(data))]
     lat = [data[i]['lat'] for i in range(len(data))]
-    cov_bands = data[i]['Band_{}'.format(i)]
+    cov_bands = [data[j]['Band_{}'.format(i)] for j in range(len(data))]
 
     col_name = f'Band_{i}'
 
@@ -45,7 +45,7 @@ for i in range(1, 54):
     )
 
     gdf['geometry'] = coordinates['geometry']
-    gdf[col_name] = cov_bands
+    gdf[col_name] = pd.Series(cov_bands)
     #gdf.to_csv('covariate_band_{}.csv'.format(i), index=False)
     #print(gdf.head())
 
