@@ -1,7 +1,7 @@
 import geopandas as gpd
 import geowombat as gw
 
-# Read a GeoPackage containing polygons
+# Read a GeoPackage containing polygons and slum labels
 lagos_poly = gpd.read_file("100mGrid_Lagos.gpkg")
 
 # Replace the geometry of each polygon with its centroid
@@ -18,5 +18,5 @@ with gw.open(
         nodata=-9999,
     )
     
-    # Save the extracted data to a CSV file
+    # Save the extracted data to a CSV file which has included slum labels
     df.to_csv("lagos_centroid.csv", index=False)
