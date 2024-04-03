@@ -1,8 +1,10 @@
 import geopandas as gpd
 import geowombat as gw
 
-# Read a GeoPackage containing polygons and slum labels
-lagos_poly = gpd.read_file("100mGrid_Lagos.gpkg")
+gpkg_file = '/home/ubuntu/Cap2024/CapstoneDataset2024/Capstone_2024/Reference/Deprived_Areas/Lagos_Slum_reference.gpkg'
+
+# Read a GeoPackage containing polygons
+lagos_poly = gpd.read_file(gpkg_file)
 
 # Replace the geometry of each polygon with its centroid
 lagos_poly["geometry"] = lagos_poly.centroid
