@@ -5,6 +5,20 @@ import pandas as pd
 import glob
 from concurrent.futures import ProcessPoolExecutor
 
+def get_tiff_files(base_dir):
+    """
+    Get TIFF files from subdirectories.
+    Args:
+        base_dir (str): Starting directory path.
+    Returns:
+        List of paths to TIFF files found within `base_dir` and its subdirectories.
+    """
+    tiff_files = []
+    for dirpath, _, filenames in os.walk(base_dir):
+        for filename in filenames:
+            if filename.endswith('.tif'):
+                tiff_files.append(os.path.join(dirpath, filename))
+    return tiff_files
 
 def process_tif(tif_file, lagos_poly, output_dir):
     """
@@ -52,12 +66,12 @@ if __name__ == "__main__":
     lagos_poly["geometry"] = lagos_poly.centroid
 
     # Directory containing the TIFF files to be processed
-    tif_directory = '/home/ubuntu/Cap2024/context/resampled_data'
-    # Retrieve all TIFF file paths in the specified directory
-    tif_files = glob.glob(os.path.join(tif_directory, '*.tif'))
+    tif_directory = '/home/ubuntu/Cap2024/context/lagos_contextual_10m'
+    # Retrieve all TIFF file paths in the directory
+    tif_files = get_tiff_files(tif_directory)
 
     # Define the output folder where the CSV files will be saved
-    output_dir = '/home/ubuntu/Cap2024/context/contextual_features_extraction'
+    output_dir = '/home/ubuntu/Cap2024/context/contextual_features_extraction_1'
 
     # Process each TIFF file in parallel, extract information and save each CSV in the specified folder
     with ProcessPoolExecutor() as executor:
