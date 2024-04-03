@@ -6,7 +6,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 
-data = pd.read_csv('../../../Data/final_input_lagos.csv')
+data = pd.read_csv('../../../Data/lagos_input.csv')
 data['Slum'].fillna(0, inplace=True)
 
 # Changing label values from 1.0, 2.0 to 1
@@ -17,11 +17,13 @@ data['Slum'] = data['Slum'].replace([1, 2], 1)
 #Removing Slum label 3 since it is unsure
 data = data[data['Slum'] != 3]
 
-X = data.iloc[:, 3:]
+data = data.drop(['geometry', 'id'], axis = 1)
+
+X = data.iloc[:, 1:]
 y = data['Slum']
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y,
-                                                    random_state=1)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=1)
 clf = MLPClassifier(random_state=1, max_iter=300).fit(X_train, y_train)
 predictions = clf.predict(X_test)
 print(classification_report(y_test, predictions))
@@ -41,6 +43,13 @@ predict_model(rf)
 knn = create_model('knn')
 predict_model(knn)
 
+#XGBoost
+xgboost = create_model('xgboost')
+predict_model(xgboost)
+
+#MLP
+mlp = create_model('mlp')
+predict_model(mlp)
 
 #Decision Trees
 dt = create_model('dt')
