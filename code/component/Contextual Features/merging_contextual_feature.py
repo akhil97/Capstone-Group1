@@ -18,7 +18,6 @@ def concat_context_csv(input_dir, output_file):
 
     # Construct the pattern to match CSV files in the input directory
     file_pattern = os.path.join(input_dir, '*.csv')
-    
     # Retrieve the list of all CSV files matching the pattern
     csv_files = glob.glob(file_pattern)
 
@@ -32,7 +31,6 @@ def concat_context_csv(input_dir, output_file):
 
         # Extract the feature name from the filename (excluding '_centroid.csv')
         feature_name = os.path.basename(file).replace('_centroid.csv', '')
-        
         # Keep only the 'geometry' column and the last column, renaming the last column to the extracted feature name
         df = df[['geometry', df.columns[-1]]].rename(columns={df.columns[-1]: feature_name})
 
@@ -46,10 +44,8 @@ def concat_context_csv(input_dir, output_file):
     merged_df.to_csv(output_file, index=False)
 
 # Define the input directory containing the CSV files
-input_dir = '/home/ubuntu/Cap2024/context/contextual_features_extraction'
-
+input_dir = '/home/ubuntu/Cap2024/context/contextual_features_extraction_1'
 # Define the path to the output file where the concatenated CSV will be saved
-output_dir = '/home/ubuntu/Cap2024/context/merged_all_feature.csv'
-
+output_dir = '/home/ubuntu/Cap2024/context/merged_all_feature_1.csv'
 # Call the function to concatenate the CSV files and save them to the specified output file
 concat_context_csv(input_dir, output_dir)
