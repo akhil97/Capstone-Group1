@@ -12,7 +12,7 @@ class TIFFProcessor:
         self.output_dir = output_dir
         self.lagos_poly = self.read_and_extract_polygons()
 
-    def read_and_extract_polygons(self)
+    def read_and_extract_polygons(self):
         # Read the geospatial polygons from the GeoPackage
         lagos_poly = gpd.read_file(self.gpkg_path)
 
