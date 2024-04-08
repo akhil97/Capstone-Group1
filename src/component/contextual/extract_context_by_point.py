@@ -16,10 +16,8 @@ class TIFFProcessor:
         self.lagos_poly = self.read_and_extract_polygons()
 
     def read_and_extract_polygons(self):
-<<<<<<< HEAD
-=======
         logging.info(f"Loading polygons from {self.gpkg_path}")
->>>>>>> 24365e3 (Revised code updated and completed)
+
         # Read the geospatial polygons from the GeoPackage
         lagos_poly = gpd.read_file(self.gpkg_path)
         # Calculate the centroids of the polygons
