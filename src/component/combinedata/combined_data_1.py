@@ -1,4 +1,7 @@
 import pandas as pd
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class CSVMerger:
     def __init__(self, covariate_file, merged_contextual_feature_file, bgrn_file, output_file):
@@ -25,17 +28,23 @@ class CSVMerger:
         ensuring that all entries from all tables are included in the result, with missing values filled with NaNs
         where no matching geometry is found. The merged DataFrame is then saved to the specified output file path.
         """
-        # Load the data from the specified CSV files
-        df_covariate = pd.read_csv(self.covariate_file)
-        df_contextual_feature = pd.read_csv(self.merged_contextual_feature_file)
-        df_bgrn = pd.read_csv(self.bgrn_file)
+        logging.info('Starting the merging process.')
+        try:
+            # Load the data from the specified CSV files
+            df_covariate = pd.read_csv(self.covariate_file)
+            df_contextual_feature = pd.read_csv(self.merged_contextual_feature_file)
+            df_bgrn = pd.read_csv(self.bgrn_file)
 
-        # Select only the 'geometry' column and the BGRN band values from the BGRN DataFrame
-        df_bgrn = df_bgrn[['geometry', 'bgrn_1', 'bgrn_2', 'bgrn_3', 'bgrn_4']]
+            # Select only the 'geometry' column and the BGRN band values from the BGRN DataFrame
+            df_bgrn = df_bgrn[['geometry', 'bgrn_1', 'bgrn_2', 'bgrn_3', 'bgrn_4']]
 
-        # Merge the DataFrames on the 'geometry' column using an 'outer' join
-        df_merged_1 = pd.merge(df_covariate, df_contextual_feature, on='geometry', how='outer')
-        df_merged_final = pd.merge(df_merged_1, df_bgrn, on='geometry', how='outer')
+            # Merge the DataFrames on the 'geometry' column using an 'outer' join
+            df_merged_1 = pd.merge(df_covariate, df_contextual_feature, on='geometry', how='outer')
+            df_merged_final = pd.merge(df_merged_1, df_bgrn, on='geometry', how='outer')
 
-        # Save the merged DataFrame to the specified output file
-        df_merged_final.to_csv(self.output_file, index=False)
+            # Save the merged DataFrame to the specified output file
+            df_merged_final.to_csv(self.output_file, index=False)
+            logging.info(f'Merged all CSVs saved successfully to {self.output_file}. Merging process completed.')
+
+        except Exception as e:
+            logging.error(f'Error during merging process: {e}')
