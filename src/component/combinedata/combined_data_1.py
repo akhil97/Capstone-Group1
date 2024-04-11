@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import logging
 
@@ -9,15 +10,15 @@ class CSVMerger:
         Initializes the CSVMerger with file paths for merging.
 
         Args:
-            covariate_file (str): File path for the CSV containing the covariate data.
-            merged_contextual_feature_file (str): File path for the CSV containing the contextual features data.
-            bgrn_file (str): File path for the CSV containing BGRN band values.
-            output_file (str): File path where the merged data will be saved as a new CSV file.
+        covariate_file (str): File path for the CSV containing the covariate data.
+        merged_contextual_feature_file (str): File path for the CSV containing the contextual features data.
+        bgrn_file (str): File path for the CSV containing BGRN band values.
+        output_file (str): File path where the merged data will be saved as a new CSV file.
         """
-        self.covariate_file = covariate_file
-        self.merged_contextual_feature_file = merged_contextual_feature_file
-        self.bgrn_file = bgrn_file
-        self.output_file = output_file
+        self.covariate_file = os.path.join(os.getcwd(), covariate_file)
+        self.merged_contextual_feature_file = os.path.join(os.getcwd(), merged_contextual_feature_file)
+        self.bgrn_file = os.path.join(os.getcwd(), bgrn_file)
+        self.output_file = os.path.join(os.getcwd(), output_file)
 
     def merge_csvs_on_geometry(self):
         """
