@@ -1,3 +1,4 @@
+import os
 import geopandas as gpd
 import geowombat as gw
 import logging
@@ -6,11 +7,25 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 class ExtractRasterValues:
     def __init__(self, gpkg_file, tif_file, output_csv):
-        self.gpkg_file = gpkg_file
-        self.tif_file = tif_file
-        self.output_csv = output_csv
+        """
+        Initialize the ExtractRasterValues object with file paths for the GeoPackage, TIFF file,
+        and the output CSV file.
+
+        Args:
+        gpkg_file (str): Path to the GeoPackage file containing polygons.
+        tif_file (str): Path to the TIFF file containing raster data.
+        output_csv (str): Path where the extracted values will be saved as CSV.
+        """
+        self.gpkg_file = os.path.join(os.getcwd(), gpkg_file)
+        self.tif_file = os.path.join(os.getcwd(), tif_file)
+        self.output_csv = os.path.join(os.getcwd(), output_csv)
 
     def extract_values(self):
+        """
+        Extracts raster values using the centroids of polygons defined in a GeoPackage file.
+        The method reads the GeoPackage, calculates centroids, opens the TIFF file,
+        extracts the raster values at these centroids, and saves the results to a CSV file.
+        """
         logging.info(f'Starting raster value extraction...')
         try:
             # Read a GeoPackage containing polygons
