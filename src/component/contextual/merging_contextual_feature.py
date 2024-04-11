@@ -12,12 +12,12 @@ class CSVConcatenator:
         and the suffix to be removed from filenames when creating column names.
 
         Args:
-            input_dir (str): Directory containing the CSV files to concatenate.
-            output_file (str): Path where the concatenated CSV file will be saved.
-            suffix (str): Suffix in the filenames to be removed. Defaults to '_centroid.csv'.
+        input_dir (str): Directory containing the CSV files to concatenate.
+        output_file (str): Path where the concatenated CSV file will be saved.
+        suffix (str): Suffix in the filenames to be removed. Defaults to '_centroid.csv'.
         """
-        self.input_dir = input_dir
-        self.output_file = output_file
+        self.input_dir = os.path.join(os.getcwd(), input_dir)
+        self.output_file = os.path.join(os.getcwd(), output_file)
         self.suffix = suffix
 
     def concat_csv_files(self):

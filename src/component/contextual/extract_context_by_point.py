@@ -1,8 +1,7 @@
 import os
-import glob
-from concurrent.futures import ProcessPoolExecutor
 import geopandas as gpd
 import geowombat as gw
+from concurrent.futures import ProcessPoolExecutor
 import logging
 
 # Setup logging
@@ -10,12 +9,26 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 class TIFFProcessor:
     def __init__(self, gpkg_path, tif_directory, output_dir):
-        self.gpkg_path = gpkg_path
-        self.tif_directory = tif_directory
-        self.output_dir = output_dir
+        """
+        Initialize the TIFFProcessor with paths to input and output data.
+
+        Args:
+        gpkg_path (str): Path to the GeoPackage file containing geospatial polygons.
+        tif_directory (str): Directory path containing TIFF files to be processed.
+        output_dir (str): Output directory to store processed CSV files.
+        """
+        self.gpkg_path = os.path.join(os.getcwd(), gpkg_path)
+        self.tif_directory = os.path.join(os.getcwd(), tif_directory)
+        self.output_dir = os.path.join(os.getcwd(), output_dir)
         self.lagos_poly = self.read_and_extract_polygons()
 
     def read_and_extract_polygons(self):
+        """
+        Load and preprocess polygons by calculating their centroids from a 100mGrid GeoPackage.
+
+        Returns:
+        GeoDataFrame with polygon centroids.
+        """
         logging.info(f"Loading polygons from {self.gpkg_path}")
 
         # Read the geospatial polygons from the GeoPackage
