@@ -1,3 +1,4 @@
+import os
 import geopandas as gpd
 import geowombat as gw
 import logging
@@ -6,11 +7,23 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 class Extractor:
     def __init__(self, poly_file, raster_file, output_file):
-        self.poly_file = poly_file
-        self.raster_file = raster_file
-        self.output_file = output_file
+        """
+        Initialize the Extractor object with file paths for the polygon, raster, and output files.
+        Args:
+        poly_file (str): Path to the GeoPackage file containing polygons.
+        raster_file (str): Path to the raster file.
+        output_file (str): Path to the output CSV file where extracted data will be saved.
+        """
+        self.poly_file = os.path.join(os.getcwd(), poly_file)
+        self.raster_file = os.path.join(os.getcwd(), raster_file)
+        self.output_file = os.path.join(os.getcwd(), output_file)
 
     def extract_data(self):
+        """
+        Extract data from a raster file using polygon centroids as the reference points.
+        The function reads the polygon file, replaces polygons with their centroids,
+        extracts the raster data at these centroid locations, and saves the data to a CSV file.
+        """
         logging.info(f'Starting data extraction...')
         try:
             # Read a GeoPackage containing polygons and slum labels
