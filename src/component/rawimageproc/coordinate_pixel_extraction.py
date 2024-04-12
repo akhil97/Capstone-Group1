@@ -47,6 +47,9 @@ class ExtractRasterValues:
                 # Rename columns in the extracted DataFrame
                 df.rename(columns={1: 'bgrn_1', 2: 'bgrn_2', 3: 'bgrn_3', 4: 'bgrn_4'}, inplace=True)
 
+                # Select only the 'geometry' column and the BGRN band values from the DataFrame
+                df = df[['geometry', 'bgrn_1', 'bgrn_2', 'bgrn_3', 'bgrn_4']]
+
                 # Save the extracted data to a CSV file
                 df.to_csv(self.output_csv, index=False)
                 logging.info(f'BGRN CSV saved successfully to {self.output_csv}')
