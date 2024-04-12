@@ -9,8 +9,8 @@ This project involves extracting slum labels, geometric points, RBGN values, and
 - **Objective**: Extract slum labels, geometric points, and 53 covariate band values.
 - **Script**: `extract_by_point.py`
 - **Inputs**:
-  - A reference GPKG file for Lagos.
-  - A covariate TIFF file that includes 53 band values.
+  - A 'Lagos_Slum_reference.gpkg' file for Lagos.
+  - A 'lag_covariate_compilation_53bands.tif' file that includes 53 band values.
 - **Output**:
   - `lagos_centroid.csv`: Contains slum labels, geometric points, and 53 covariate band values.
 
@@ -18,7 +18,7 @@ This project involves extracting slum labels, geometric points, RBGN values, and
 - **Objective**: Retrieve geometric points and extract contextual features from 144 individual TIFF files.
 - **Script**: `extract_context_by_point.py`
 - **Inputs**:
-  - A '100mGrid_Lagos.gpkg' file. 
+  - A `100mGrid_Lagos.gpkg` file. 
   - 144 individual contextual feature TIFF files.
 - **Output**:
   - Directory `contextual_features_extraction` with 144 CSV files, each holding contextual feature values for points.
