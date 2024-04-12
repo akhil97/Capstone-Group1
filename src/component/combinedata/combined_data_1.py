@@ -36,9 +36,6 @@ class CSVMerger:
             df_contextual_feature = pd.read_csv(self.merged_contextual_feature_file)
             df_bgrn = pd.read_csv(self.bgrn_file)
 
-            # Select only the 'geometry' column and the BGRN band values from the BGRN DataFrame
-            df_bgrn = df_bgrn[['geometry', 'bgrn_1', 'bgrn_2', 'bgrn_3', 'bgrn_4']]
-
             # Merge the DataFrames on the 'geometry' column using an 'outer' join
             df_merged_1 = pd.merge(df_covariate, df_contextual_feature, on='geometry', how='outer')
             df_merged_final = pd.merge(df_merged_1, df_bgrn, on='geometry', how='outer')
