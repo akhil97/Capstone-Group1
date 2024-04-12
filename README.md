@@ -50,5 +50,5 @@ This project involves extracting slum labels, geometric points, RBGN values, and
 - **Output**:
   - `final_output_lagos.csv`: A comprehensive CSV file integrating all extracted data.
 
-### 6. Data Pipeline Tree 
+### 6. Data Pipeline Tree Overview
 <img width="491" alt="Screen Shot 2024-04-11 at 8 13 26 PM" src="https://github.com/akhil97/Capstone-Group1/assets/97569608/4068b85c-d844-43f2-9b13-95dbf3086b66">
