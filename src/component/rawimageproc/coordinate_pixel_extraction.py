@@ -45,7 +45,9 @@ class ExtractRasterValues:
                 logging.info('Data extraction from tiff file completed.')
 
                 # Rename columns in the extracted DataFrame
-                df.rename(columns={1: 'bgrn_1', 2: 'bgrn_2', 3: 'bgrn_3', 4: 'bgrn_4'}, inplace=True)
+                # This example renames four channels. If your TIFF contains additional channels, 
+                # you should modify the column names accordingly to reflect the contents
+                df.rename(columns={1: 'bgrn_1', 2: 'bgrn_2', 3: 'bgrn_3', 4: 'bgrn_4'}, inplace=True) 
 
                 # Select only the 'geometry' column and the BGRN band values from the DataFrame
                 df = df[['geometry', 'bgrn_1', 'bgrn_2', 'bgrn_3', 'bgrn_4']]
