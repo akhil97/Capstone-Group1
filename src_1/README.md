@@ -1,4 +1,4 @@
-# Capstone-Group1 -- Geospatial Data Pipeline Processing for Lagos
+# Capstone-Group1 -- Geospatial Data Pipeline Processing for Lagos, including Resampling Processing
 
 ## Overview
 This project involves extracting slum labels, geometric points, RBGN values, and various covariate and contextual feature values from multiple geospatial data sources. Additionally, the proejct requires resampling 144 TIFF files and an RBGN file from a 10-meter resolution to a 100-meter resolution. The output is a comprehensive CSV file that integrates all extracted data aligned by geometric points, suitable for further analysis or modeling.
