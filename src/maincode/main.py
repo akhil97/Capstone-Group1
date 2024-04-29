@@ -22,8 +22,8 @@ if __name__ == '__main__':
 
     # Step-1
     # Define file paths
-    poly_file = os.path.join(base_dir, 'CapstoneDataset2024/Capstone_2024/Reference/Deprived_Areas/Lagos_Slum_reference.gpkg')
-    raster_file = os.path.join(base_dir, 'CapstoneDataset2024/Capstone_2024/Dataset/Lagos/lagos_covariate_feature_53/lag_covariate_compilation_53bands.tif')
+    poly_file = os.path.join(base_dir, '../../../Data/Lagos_Slum_reference.gpkg')
+    raster_file = os.path.join(base_dir, '../../../Data/lag_covariate_compilation_53bands.tif')
     output_file = os.path.join(base_dir, 'covariate/lagos_centroid.csv')
 
     # Create an instance of the Extractor class
@@ -33,13 +33,13 @@ if __name__ == '__main__':
     extractor.extract_data()
 
     #Step-2.1
-    input_dir = os.path.join(base_dir, 'context/lagos_contextual_10m')
+    input_dir = os.path.join(base_dir, '../../../Data/lagos_contextual_10m')
     output_dir = os.path.join(base_dir, 'context/resampled_contextual_data_100m')
     resampler = context_resampled_100m.TIFFResampler(input_dir, output_dir)
     resampler.process_all_files()
 
     # Step-2.2
-    gpkg_path = os.path.join(base_dir, 'CapstoneDataset2024/Capstone_2024/Reference/Deprived_Areas/100mGrid_Lagos.gpkg')
+    gpkg_path = os.path.join(base_dir, '../../../Data/100mGrid_Lagos.gpkg')
     resampled_tif_dir = os.path.join(base_dir, 'context/resampled_contextual_data_100m')
     output_dir = os.path.join(base_dir, 'context/contextual_features_extraction')
     processor = extract_context_by_point.TIFFProcessor(gpkg_path, resampled_tif_dir, output_dir)
@@ -52,13 +52,13 @@ if __name__ == '__main__':
     concatenator.concat_csv_files()
 
     #Step-3.1
-    file_path = os.path.join(base_dir, 'raw_image/lag_bgrn.tif')
+    file_path = os.path.join(base_dir, '../../../Data/lag_bgrn.tif')
     output_path = os.path.join(base_dir, 'raw_image/lag_resampled_bgrn.tif')
     resampler = rbgn_resample.RasterResampler(file_path, output_path)
     resampler.resample_bgrn_raster()
 
     # Step-3.2
-    gpkg_file = os.path.join(base_dir, 'CapstoneDataset2024/Capstone_2024/Reference/Deprived_Areas/100mGrid_Lagos.gpkg')
+    gpkg_file = os.path.join(base_dir, '../../../Data/100mGrid_Lagos.gpkg')
     tif_file = os.path.join(base_dir, 'raw_image/lag_resampled_bgrn.tif')
     output_csv = os.path.join(base_dir, 'raw_image/lagos_resampled_bgrn.csv')
     extractor = coordinate_pixel_extraction.ExtractRasterValues(gpkg_file, tif_file, output_csv)
