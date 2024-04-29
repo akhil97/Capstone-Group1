@@ -9,9 +9,9 @@ The dataset used for analyzing slums in Lagos contains 305,381 rows and 204 colu
 4. Geospatial Coordinates: Data includes longitude and latitude, facilitating precise location mapping.
 5. Slum Labels:
    Labeling Scheme: The slum labels are categorized into 0, 1, 2, and 3. In the modeling:
-   5.1 0 indicates non-deprived areas.
-   5.2 1 and 2 are combined to denote deprived areas, capturing the broader spectrum of slum-like conditions.
-   5.3 3 is excluded from the analysis due to uncertainty about its classification, ensuring data integrity and reliability.
+   - 0 indicates non-deprived areas.
+   - 1 and 2 are combined to denote deprived areas, capturing the broader spectrum of slum-like conditions.
+   - 3 is excluded from the analysis due to uncertainty about its classification, ensuring data integrity and reliability.
 
 
 Modeling Approach:
