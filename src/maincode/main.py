@@ -4,16 +4,16 @@ import sys
 project_path = '/home/ubuntu/Cap2024'
 sys.path.append(project_path)
 
-from src_1.component.covariate import extract_by_point
+from src.component.covariate import extract_by_point
 
-from src_1.component.contextual import context_resampled_100m
-from src_1.component.contextual import extract_context_by_point
-from src_1.component.contextual import merging_contextual_feature
+from src.component.contextual import context_resampled_100m
+from src.component.contextual import extract_context_by_point
+from src.component.contextual import merging_contextual_feature
 
-from src_1.component.rawimageproc import rbgn_resample
-from src_1.component.rawimageproc import coordinate_pixel_extraction
+from src.component.rawimageproc import rbgn_resample
+from src.component.rawimageproc import coordinate_pixel_extraction
 
-from src_1.component.combinedata import combined_data_1
+from src.component.combinedata import combined_data
 
 
 if __name__ == '__main__':
