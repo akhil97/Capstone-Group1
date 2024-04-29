@@ -12,9 +12,11 @@ The dataset used for analyzing slums in Lagos contains 305,381 rows and 204 colu
     a. 0 indicates non-deprived areas.
     b. 1 and 2 are combined to denote deprived areas, capturing the broader spectrum of slum-like conditions.
     c. 3 is excluded from the analysis due to uncertainty about its classification, ensuring data integrity and reliability.
-6. Modeling Approach:
-    a. Tool Used: PyCaret, a machine learning library in Python, simplifies the model development process.
-    b. Data Split: The standard 70% training and 30% testing split provides a robust dataset for training while reserving a substantial portion for validating the model's performance.
+
+
+Modeling Approach:
+1. Tool Used: PyCaret, a machine learning library in Python, simplifies the model development process.
+2. Data Split: The standard 70% training and 30% testing split provides a robust dataset for training while reserving a substantial portion for validating the model's performance.
 
 ## Processes and Scripts
 
