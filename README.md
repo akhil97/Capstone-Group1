@@ -1,4 +1,4 @@
-# Capstone-Group1 -- Geospatial Data Pipeline Processing for Lagos, including Resampling Processing
+# Capstone-Group1 -- Geospatial Data Pipeline Processing and Modelling for Lagos, including Resampling Processing
 
 ## Overview
 This project involves extracting slum labels, geometric points, RBGN values, and various covariate and contextual feature values from multiple geospatial data sources. Additionally, the proejct requires resampling 144 TIFF files and an RBGN file from a 10-meter resolution to a 100-meter resolution. The output is a comprehensive CSV file that integrates all extracted data aligned by geometric points, suitable for further analysis or modeling.
@@ -65,6 +65,16 @@ This project involves extracting slum labels, geometric points, RBGN values, and
   - `lagos_bgrn.csv`
 - **Output**:
   - `final_output_lagos.csv`: A comprehensive CSV file integrating all extracted data.
+ 
+### 5. Modelling for Machine Learning Using PyCaret
+- **Objective**: Merge slum labels, contextual features, covariate band values, and RBGN values based on geometric points.
+- **Script**: `modelling.py` & `modelling_balanced.py`
+- **Inputs**:
+  - `final_output_lagos.csv`
+- **Output**:
+  - `modelling_logs_imbalanced.text`  
+  - `modelling_logs_balanced.text`: A comprehensive modelling result.
+
 
 ### 6. Data Pipeline Tree Overview
 <img width="489" alt="Screen Shot 2024-04-22 at 5 42 25 PM" src="https://github.com/akhil97/Capstone-Group1/assets/97569608/2d55a5cb-228e-448a-86d0-8f3445af3dcd">
