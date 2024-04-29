@@ -3,22 +3,20 @@
 ## Overview
 The dataset used for analyzing slums in Lagos contains 305,381 rows and 204 columns, which include:
 
-Pixel Values: 4 features from Sentinel-2 satellite images, representing different spectral bands (Red, Blue, Green, and Near-Infrared).
-Covariate Features: 53 variables that include data which help in understanding the factors influencing the slum areas.
-Contextual Features: 144 features representing additional spatial data such as land use, proximity to amenities, or infrastructural details.
-Geospatial Coordinates: Data includes longitude and latitude, facilitating precise location mapping.
+1. Pixel Values: 4 features from Sentinel-2 satellite images, representing different spectral bands (Red, Blue, Green, and Near-Infrared).
+2. Covariate Features: 53 variables that include data which help in understanding the factors influencing the slum areas.
+3. Contextual Features: 144 features representing additional spatial data such as land use, proximity to amenities, or infrastructural details.
+4. Geospatial Coordinates: Data includes longitude and latitude, facilitating precise location mapping.
 
-Slum Labels:
+- Slum Labels:
 Labeling Scheme: The slum labels are categorized into 0, 1, 2, and 3. In the modeling:
-0 indicates non-deprived areas.
-1 and 2 are combined to denote deprived areas, capturing the broader spectrum of slum-like conditions.
-3 is excluded from the analysis due to uncertainty about its classification, ensuring data integrity and reliability.
+a. 0 indicates non-deprived areas.
+b. 1 and 2 are combined to denote deprived areas, capturing the broader spectrum of slum-like conditions.
+c. 3 is excluded from the analysis due to uncertainty about its classification, ensuring data integrity and reliability.
 
-Modeling Approach:
-Tool Used: PyCaret, a machine learning library in Python, simplifies the model development process.
-Data Split: The standard 70% training and 30% testing split provides a robust dataset for training while reserving a substantial portion for validating the model's performance.
-Performance Metric: An F1 score of 0.75 suggests a good balance between precision and recall, indicating the model's effectiveness in distinguishing between deprived and non-deprived areas. This score reflects a competent model but also highlights room for improvement, possibly through advanced deep learning techniques.
-
+- Modeling Approach:
+a. Tool Used: PyCaret, a machine learning library in Python, simplifies the model development process.
+b. Data Split: The standard 70% training and 30% testing split provides a robust dataset for training while reserving a substantial portion for validating the model's performance.
 
 ## Processes and Scripts
 
