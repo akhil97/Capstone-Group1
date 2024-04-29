@@ -7,16 +7,14 @@ The dataset used for analyzing slums in Lagos contains 305,381 rows and 204 colu
 2. Covariate Features: 53 variables that include data which help in understanding the factors influencing the slum areas.
 3. Contextual Features: 144 features representing additional spatial data such as land use, proximity to amenities, or infrastructural details.
 4. Geospatial Coordinates: Data includes longitude and latitude, facilitating precise location mapping.
-
-- Slum Labels:
-Labeling Scheme: The slum labels are categorized into 0, 1, 2, and 3. In the modeling:
-a. 0 indicates non-deprived areas.
-b. 1 and 2 are combined to denote deprived areas, capturing the broader spectrum of slum-like conditions.
-c. 3 is excluded from the analysis due to uncertainty about its classification, ensuring data integrity and reliability.
-
-- Modeling Approach:
-a. Tool Used: PyCaret, a machine learning library in Python, simplifies the model development process.
-b. Data Split: The standard 70% training and 30% testing split provides a robust dataset for training while reserving a substantial portion for validating the model's performance.
+5. Slum Labels:
+   Labeling Scheme: The slum labels are categorized into 0, 1, 2, and 3. In the modeling:
+    a. 0 indicates non-deprived areas.
+    b. 1 and 2 are combined to denote deprived areas, capturing the broader spectrum of slum-like conditions.
+    c. 3 is excluded from the analysis due to uncertainty about its classification, ensuring data integrity and reliability.
+6. Modeling Approach:
+    a. Tool Used: PyCaret, a machine learning library in Python, simplifies the model development process.
+    b. Data Split: The standard 70% training and 30% testing split provides a robust dataset for training while reserving a substantial portion for validating the model's performance.
 
 ## Processes and Scripts
 
