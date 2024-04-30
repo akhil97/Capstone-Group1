@@ -1,49 +1,51 @@
-import os
 import pandas as pd
-import logging
+import glob
+import os
 
-# Setup basic logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+def concat_context_csv(input_dir, output_file):
+    """
+    Concatenates multiple CSV files located in a specified directory into a single CSV file.
+    Each CSV file is expected to have a 'geometry' column and one additional column containing feature values.
+    The name of the additional column is derived from the filename and is used as the feature name in the merged DataFrame.
 
+    Args:
+    input_dir (str): The directory containing the CSV files to concatenate.
+    output_file (str): The path where the concatenated CSV file will be saved.
 
-def merge_csv_files(directory, output_filename):
-    try:
-        # Dictionary to hold data from each CSV file with the filename as key
-        data_dict = {}
+    Returns:
+    None: The function does not return a value but writes the merged DataFrame to a CSV file.
+    """
 
-        # Read the longitude and latitude from the first file to use as a base for merging
-        first_file = next((f for f in os.listdir(directory) if f.endswith('.csv')), None)
-        if first_file is None:
-            logging.error("No CSV files found in the directory.")
-            return
+    # Construct the pattern to match CSV files in the input directory
+    file_pattern = os.path.join(input_dir, '*.csv')
+    # Retrieve the list of all CSV files matching the pattern
+    csv_files = glob.glob(file_pattern)
 
-        base_df = pd.read_csv(os.path.join(directory, first_file))[['longitude', 'latitude']]
+    # Initialize the merged DataFrame
+    merged_df = None
 
-        # Iterate over files in the directory and read only the 'Raster Value' column
-        for filename in os.listdir(directory):
-            if filename.endswith('.csv'):
-                file_path = os.path.join(directory, filename)
-                # Extract the name for the new column from the filename
-                column_name = os.path.splitext(filename)[0]
-                # Read the 'Raster Value' column and add it to the dictionary
-                data_dict[column_name] = pd.read_csv(file_path)['Raster Value']
+    # Iterate over each file in the list of CSV files
+    for file in csv_files:
+        # Read the current CSV file into a DataFrame
+        df = pd.read_csv(file)
 
-        # Concatenate all raster value columns along the columns axis
-        raster_values_df = pd.concat(data_dict, axis=1)
+        # Extract the feature name from the filename (excluding '_centroid.csv')
+        feature_name = os.path.basename(file).replace('_centroid.csv', '')
+        # Keep only the 'geometry' column and the last column, renaming the last column to the extracted feature name
+        df = df[['geometry', df.columns[-1]]].rename(columns={df.columns[-1]: feature_name})
 
-        # Join the base_df with the raster values dataframe
-        merged_df = base_df.join(raster_values_df)
+        # If merged_df is None, assign df to merged_df
+        if merged_df is None:
+            merged_df = df
+        else:
+            # Merge the current DataFrame with the merged DataFrame based on the 'geometry' column
+            merged_df = pd.merge(merged_df, df, on='geometry', how='outer')
+    # Save the merged DataFrame to a CSV file at the specified output path
+    merged_df.to_csv(output_file, index=False)
 
-        # Save the merged dataframe to a new CSV file
-        merged_df.to_csv(output_filename, index=False)
-        logging.info(f'Merged files into {output_filename}')
-
-    except Exception as e:
-        logging.error(f"Error occurred: {e}")
-
-if __name__ == '__main__':
-    # Specify the directory containing CSV files and the output file name
-    directory = '/home/ubuntu/Cap2024/context/contextual_features_extraction'
-    output_filename = '/home/ubuntu/Cap2024/context/merged_file.csv'
-    merge_csv_files(directory, output_filename)
-
+# Define the input directory containing the CSV files
+input_dir = '/home/ubuntu/Cap2024/context/contextual_features_extraction_1'
+# Define the path to the output file where the concatenated CSV will be saved
+output_dir = '/home/ubuntu/Cap2024/context/merged_all_feature_1.csv'
+# Call the function to concatenate the CSV files and save them to the specified output file
+concat_context_csv(input_dir, output_dir)
