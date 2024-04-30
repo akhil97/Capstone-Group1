@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 from pycaret.classification import *
 from sklearn.preprocessing import LabelEncoder
 
@@ -10,17 +11,31 @@ print(len(data))
 label_encoder = LabelEncoder()
 data['Slum'] = label_encoder.fit_transform(data['Slum'])
 data['Slum'] = data['Slum'].replace([1, 2], 1)
+
+#Drop id column
+data = data.drop(['id'], axis = 1)
+
+#Get longitudes and latitudes from geometric points
+data['long'] = ''
+data['lat'] = ''
+for i in range(len(data['geometry'])):
+    point_str = data['geometry'][i]
+    matches = re.findall(r'[-+]?\d*\.\d+', point_str)
+    coordinates = [float(match) for match in matches]
+    data['long'][i] = coordinates[0]
+    data['lat'][i] = coordinates[1]
+
+#Remove -9999 no data rows from the dataset
+data = data[~data.isin([-9999]).any(axis=1)]
+
+#Drop geometry column
+data = data.drop(['geometry'], axis = 1)
+
+#Slum labels unsure
 data3 = data[data['Slum'] == 3]
 
 #Removing Slum label 3 since it is unsure
 data = data[data['Slum'] != 3]
-
-X = data.iloc[:, 1:]
-y = data['Slum']
-
-data = data.drop(['geometry', 'id'], axis = 1)
-data = data[~data.isin([-9999]).any(axis=1)]
-print(len(data))
 
 clf1 = setup(data, target = 'Slum', fix_imbalance = True)
 best_model = compare_models()
@@ -88,18 +103,29 @@ predict_model(lightgbm)
 nb = create_model('nb')
 predict_model(nb)
 
+#save model
+save_model(xgboost, 'modelling_balanced')
+
+#Save experiment
+save_experiment('my_experiment2')
+
+X_test = get_config('X_test')
+
+predictions = predict_model(xgboost, data=X_test)
+predictions.to_csv('../../../Data/test_results_lagos_balanced.csv')
+
 
 #Tune best model
 tuned_model = tune_model(xgboost)
 
 #AUC-ROC plot
-plot_model(estimator = tuned_model, plot = 'auc')
+plot_model(estimator = xgboost, plot = 'pr')
 
 #Plotting the confusion Matrix
-plot_model(estimator = tuned_model, plot = 'confusion_matrix')
+plot_model(estimator = xgboost, plot = 'confusion_matrix')
 
-#Plotting the confusion Matrix
-interpret_model(tuned_model)
+#SHAP plot
+interpret_model(xgboost)
 
 predict_model(xgboost, data = data3)
 
