@@ -3,9 +3,9 @@
 ## Overview
 The dataset used for analyzing slums in Lagos contains 305,381 rows and 204 columns, which include:
 
-1. Pixel Values: 4 features from Sentinel-2 satellite images, representing different spectral bands (Red, Blue, Green, and Near-Infrared).
+1. Pixel Values: 4 features from the Sentinel-2 satellite image, representing different spectral bands (Red, Blue, Green, and Near-Infrared).
 2. Covariate Features: 53 variables that include data which help in understanding the factors influencing the slum areas.
-3. Contextual Features: 144 features representing additional spatial data such as land use, proximity to amenities, or infrastructural details.
+3. Contextual Features: 144 features representing a variety of attributes, such as building counts, density, climate risk factors, housing quality, extreme temperatures, population density, and even the differentiation between urban and rural areas, along with nocturnal lighting.
 4. Geospatial Coordinates: Data includes longitude and latitude, facilitating precise location mapping.
 5. Slum Labeling Scheme: The slum labels are categorized into 0, 1, 2, and 3. In the modeling:
    - 0 indicates non-deprived areas.
