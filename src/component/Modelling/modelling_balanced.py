@@ -41,63 +41,63 @@ clf1 = setup(data, target = 'Slum', fix_imbalance = True)
 best_model = compare_models()
 
 # #Logistic Regression
-# lr = create_model('lr')
-# predict_model(lr)
+lr = create_model('lr')
+predict_model(lr)
 #
 # #Random Forest
-# rf = create_model('rf')
-# predict_model(rf)
+rf = create_model('rf')
+predict_model(rf)
 #
 # #K Nearest Neighbors
-# knn = create_model('knn')
-# predict_model(knn)
+knn = create_model('knn')
+predict_model(knn)
 #
 #XGBoost
 xgboost = create_model('xgboost')
 predict_model(xgboost)
 #
 # #MLP
-# mlp = create_model('mlp')
-# predict_model(mlp)
+mlp = create_model('mlp')
+predict_model(mlp)
 #
 # #Decision Trees
-# dt = create_model('dt')
-# predict_model(dt)
+dt = create_model('dt')
+predict_model(dt)
 #
 #
 # #Ridge Classifier
-# ridge = create_model('ridge')
-# predict_model(ridge)
+ridge = create_model('ridge')
+predict_model(ridge)
 #
 #
 # #Quadratic Discriminant Analysis
-# qda = create_model('qda')
-# predict_model(qda)
+qda = create_model('qda')
+predict_model(qda)
 #
 #
 # #Ada Boost Classifier
-# ada = create_model('ada')
-# predict_model(ada)
+ada = create_model('ada')
+predict_model(ada)
 #
 # #Gradient Boosting Classifier
-# gbc = create_model('gbc')
-# predict_model(gbc)
+gbc = create_model('gbc')
+predict_model(gbc)
 #
 # #Extra Trees Classifier
-# et = create_model('et')
-# predict_model(et)
+et = create_model('et')
+predict_model(et)
 
 #Light Gradient Boosting Machine
 lightgbm = create_model('lightgbm')
 predict_model(lightgbm)
 
 # #Dummy Classifier
-# dummy = create_model('dummy')
-# predict_model(dummy)
+dummy = create_model('dummy')
+predict_model(dummy)
 #
 # #SVM - Linear Kernel
-# svm = create_model('svm')
-# predict_model(svm)
+svm = create_model('svm')
+predict_model(svm)
 
 #Naive Bayes
 nb = create_model('nb')
