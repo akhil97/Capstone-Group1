@@ -118,7 +118,7 @@ predictions.to_csv('../../../Data/test_results_lagos_balanced.csv')
 #Tune best model
 tuned_model = tune_model(xgboost)
 
-#AUC-ROC plot
+#AUC-PR plot
 plot_model(estimator = xgboost, plot = 'pr')
 
 #Plotting the confusion Matrix
