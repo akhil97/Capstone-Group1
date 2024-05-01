@@ -37,7 +37,7 @@ data3 = data[data['Slum'] == 3]
 data = data[data['Slum'] != 3]
 
 #Pycaret experimentation setup
-clf1 = setup(data, target = 'Slum', include = ['ada', 'gbc', 'et', 'lightgbm', 'dummy', 'svm', 'nb'])
+clf1 = setup(data, target = 'Slum')
 best_model = compare_models()
 
 #Logistic Regression
