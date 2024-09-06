@@ -17,6 +17,42 @@ Modeling Approach:
 1. Tool Used: PyCaret, a machine learning library in Python, simplifies the model development process.
 2. Data Split: The standard 70% training and 30% testing split provides a robust dataset for training while reserving a substantial portion for validating the model's performance.
 
+## Installation steps
+```
+pip install -r src/requirements.txt
+```
+Build GDAL library from source
+```
+cd ~
+cd ../../tmp/
+wget https://download.osgeo.org/gdal/2.2.4/gdal-2.2.4.tar.gz
+tar xzf gdal-2.2.4.tar.gz
+cd gdal-2.2.4
+./configure
+make
+sudo make install
+
+```
+Install GeoWombat
+```
+pip install git+https://github.com/jgrss/geowombat
+sudo apt update -y && apt upgrade -y && \
+apt install -y software-properties-common && \
+add-apt-repository ppa:ubuntugis/ppa && \
+apt update -y && apt install -y \
+gdal-bin \
+geotiff-bin \
+git \
+libgdal-dev \
+libgl1 \
+libspatialindex-dev \
+wget \
+python3 \
+python3-pip \
+pip \
+g++
+```
+
 ## Processes and Scripts
 
 ### 1. Initial Covariate Data and Slum Label Extraction
