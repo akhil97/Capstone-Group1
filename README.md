@@ -4,16 +4,16 @@
 The dataset used for analyzing slums in Lagos contains 305,381 rows and 204 columns, which include:
 
 1. Pixel Values: 4 features from the Sentinel-2 satellite image, representing different spectral bands (Red, Blue, Green, and Near-Infrared).
-2. Covariate Features: 53 variables that include data which help in understanding the factors influencing the slum areas.
+2. Covariate Features: 53 variables that include data that help understand the factors influencing the slum areas.
 3. Contextual Features: 144 features representing a variety of attributes, such as building counts, density, climate risk factors, housing quality, extreme temperatures, population density, and even the differentiation between urban and rural areas, along with nocturnal lighting.
 4. Geospatial Coordinates: Data includes longitude and latitude, facilitating precise location mapping.
-5. Slum Labeling Scheme: The slum labels are categorized into 0, 1, 2, and 3. In the modeling:
+5. Slum Labeling Scheme: The slum labels are categorized into 0, 1, 2, and 3. In the modelling:
    - 0 indicates non-deprived areas.
    - 1 and 2 are combined to denote deprived areas, capturing the broader spectrum of slum-like conditions.
    - 3 is excluded from the analysis due to uncertainty about its classification, ensuring data integrity and reliability.
 
 
-Modeling Approach:
+Modelling Approach:
 1. Tool Used: PyCaret, a machine learning library in Python, simplifies the model development process.
 2. Data Split: The standard 70% training and 30% testing split provides a robust dataset for training while reserving a substantial portion for validating the model's performance.
 
@@ -21,25 +21,13 @@ Modeling Approach:
 ```
 pip install -r src/requirements.txt
 ```
-Build GDAL library from source
-```
-cd ~
-cd ../../tmp/
-wget https://download.osgeo.org/gdal/2.2.4/gdal-2.2.4.tar.gz
-tar xzf gdal-2.2.4.tar.gz
-cd gdal-2.2.4
-./configure
-make
-sudo make install
-
-```
 Install GeoWombat
 ```
 pip install git+https://github.com/jgrss/geowombat
-sudo apt update -y && apt upgrade -y && \
-apt install -y software-properties-common && \
-add-apt-repository ppa:ubuntugis/ppa && \
-apt update -y && apt install -y \
+sudo apt update -y && sudo apt upgrade -y && \
+sudo apt install -y software-properties-common && \
+sudo add-apt-repository ppa:ubuntugis/ppa && \
+sudo apt update -y && sudo apt install -y \
 gdal-bin \
 geotiff-bin \
 git \
