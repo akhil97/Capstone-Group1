@@ -1,4 +1,4 @@
-# Capstone-Group1 -- Geospatial Data Pipeline Processing and Modelling for Lagos, including Resampling Processing
+# Capstone-Group1 -- Geospatial Data Pipeline Processing and Modelling for Lagos and Nairobi including Resampling Processing
 
 ## Overview
 The dataset used for analyzing slums in Lagos contains 305,381 rows and 204 columns, which include:
