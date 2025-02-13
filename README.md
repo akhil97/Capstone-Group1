@@ -12,6 +12,8 @@ The dataset used for analyzing slums in Lagos contains 305,381 rows and 204 colu
    - 1 and 2 are combined to denote deprived areas, capturing the broader spectrum of slum-like conditions.
    - 3 is excluded from the analysis due to uncertainty about its classification, ensuring data integrity and reliability.
 
+<img width="757" alt="Flowchart" src="https://github.com/user-attachments/assets/bb5f13d9-1018-417c-9b68-c912e49e261f" />
+
 
 Modelling Approach:
 1. Tool Used: PyCaret, a machine learning library in Python, simplifies the model development process.
@@ -112,6 +114,7 @@ g++
 - **Output**:
   - `modelling_logs_imbalanced.text`: Modelling results for Lagos with imbalanced slum labels.
   - `modelling_logs_balanced.text`: Comprehensive modelling results for Lagos with balanced slum labels.
+
 
 
 ### 6. Data Pipeline Tree Overview
