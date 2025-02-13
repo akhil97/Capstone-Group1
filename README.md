@@ -110,8 +110,8 @@ g++
 - **Inputs**:
   - `final_output_lagos.csv`
 - **Output**:
-  - `modelling_logs_imbalanced.text`: Modelling results for laogs with imbalanaced slum labels.
-  - `modelling_logs_balanced.text`: Comprehensive modelling results for laogs with balanaced slum labels.
+  - `modelling_logs_imbalanced.text`: Modelling results for Lagos with imbalanced slum labels.
+  - `modelling_logs_balanced.text`: Comprehensive modelling results for Lagos with balanced slum labels.
 
 
 ### 6. Data Pipeline Tree Overview
