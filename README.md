@@ -25,10 +25,10 @@ The dataset used for analyzing slums in Lagos contains 305,381 rows and 204 colu
 <img width="757" alt="Flowchart" src="https://github.com/user-attachments/assets/bb5f13d9-1018-417c-9b68-c912e49e261f" />
 
 # Scope of the project
--Introduction
+-Introduction <br>
 The prevalence and growth of slums in low- and middle- income countries (LMICs) present a significant challenge especially during COVID-19 pandemic and economic crisis. <br>
 Accurate mapping of deprived areas is important for monitoring Sustainable Development Goals (SDGs).  <br>
--The IDEAMAPS Project 
+-The IDEAMAPS Project <br>
 Aims to improve the consistency and accuracy of mapping deprived areas across cities, mainly focusing on African cities, specifically Lagos, Nigeria and Nairobi, Kenya.  <br>
 -Data sources and metrics  <br>
 Open geospatial data sources: Google Maps Engine & OpenStreetMap  <br>
