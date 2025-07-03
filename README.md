@@ -1,6 +1,15 @@
 # Capstone-Group1 -- Geospatial Data Pipeline Processing and Modelling for Lagos and Nairobi including Resampling Processing
 
-## Overview
+# Table of contents
+- Dataset Overview
+- Data pipeline diagram
+- Scope of the project
+- Modelling approach
+- Installation steps
+- Processes and scripts
+- Data pipeline tree overview
+
+# Dataset Overview
 The dataset used for analyzing slums in Lagos contains 305,381 rows and 204 columns, which include:
 
 1. Pixel Values: 4 features from the Sentinel-2 satellite image, representing different spectral bands (Red, Blue, Green, and Near-Infrared).
@@ -12,10 +21,22 @@ The dataset used for analyzing slums in Lagos contains 305,381 rows and 204 colu
    - 1 and 2 are combined to denote deprived areas, capturing the broader spectrum of slum-like conditions.
    - 3 is excluded from the analysis due to uncertainty about its classification, ensuring data integrity and reliability.
 
+# Data pipeline diagram
 <img width="757" alt="Flowchart" src="https://github.com/user-attachments/assets/bb5f13d9-1018-417c-9b68-c912e49e261f" />
 
+# Scope of the project
+-Introduction
+The prevalence and growth of slums in low- and middle- income countries (LMICs) present a significant challenge especially during COVID-19 pandemic and economic crisis. <br>
+Accurate mapping of deprived areas is important for monitoring Sustainable Development Goals (SDGs).  <br>
+-The IDEAMAPS Project 
+Aims to improve the consistency and accuracy of mapping deprived areas across cities, mainly focusing on African cities, specifically Lagos, Nigeria and Nairobi, Kenya.  <br>
+-Data sources and metrics  <br>
+Open geospatial data sources: Google Maps Engine & OpenStreetMap  <br>
+Relevant datasets: sentinel-2 imagery, covariate features, and contextual features  <br>
+-Model performance: F1 scores with balanced precision and recall values  <br>
+The best-performing model will be determined by its ability to generalize and identify deprived areas across different urban settings  <br>
 
-Modelling Approach:
+# Modelling approach:
 1. Tool Used: PyCaret, a machine learning library in Python, simplifies the model development process.
 2. Data Split: The standard 70% training and 30% testing split provides a robust dataset for training while reserving a substantial portion for validating the model's performance.
 
