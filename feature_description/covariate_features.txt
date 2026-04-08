@@ -1,53 +1,53 @@
-	1.	                      +’fs_dist_fs_2020',
-	2.	                      +'fs_dist_school_2020',
-	3.	                      +'in_dist_rd_2016',
-	4.	                      +'in_dist_rd_intersect_2016',
-	5.	                      +'in_dist_waterway_2016',
-	6.	                      +'in_night_light_2016',
-	7.	                      +'ph_base_water_2010',
-	8.	                      +'ph_bio_dvst_2015',
-	9.	                      +'ph_climate_risk_2020',
-	10.	                      +'ph_dist_aq_veg_2015',
-	11.	                      +'ph_dist_art_surface_2015',
-	12.	                      +'ph_dist_bare_2015',
-	13.	                      +'ph_dist_cultivated_2015',
-	14.	                      +'ph_dist_herb_2015',
-	15.	                      +'ph_dist_inland_water_2018',
-	16.	                      +'ph_dist_open_coast_2020',
-	17.	                      +'ph_dist_shrub_2015',
-	18.	                      +'ph_dist_sparse_veg_2015',
-	19.	                      +'ph_dist_woody_tree_2015',
-	20.	                      +'ph_gdmhz_2005',
-	21.	                      +'ph_grd_water_2000',
-	22.	                      +'ph_hzd_index_2011',
-	23.	                      +'ph_land_c1_2019',
-	24.	                      +'ph_land_c2_2020',
-	25.	                      +'ph_max_tem_2019',
-	26.	                      +'ph_ndvi_2019',
-	27.	                      +'ph_pm25_2016',
-	28.	                      'ph_slope_2000',
-	29.	                      +'ses_an_visits_2014',
-	30.	                      +'ses_child_stuned_2014',
-	31.	                      +'ses_dtp3_2014',
-	32.	                      +'ses_hf_delivery_2014',
-	33.	                      +'ses_impr_water_src_2014',
-	34.	                      +'ses_ITN_2014',
-	35.	                      +'ses_m_lit_2014',
-	36.	                      +'ses_measles_2014',
-	37.	                      +'ses_odef_2014',
-	38.	                      +'ses_pfpr_2017',
-	39.	                      +'ses_preg_2017',
-	40.	                      +'ses_unmet_need_2014',
-	41.	                      +'ses_w_lit_2016',
-	42.	                      +'sh_dist_mnr_pofw_2019',
-	43.	                      +'sh_dist_pofw_2019',
-	44.	                      +'sh_ethno_den_2020',
-	45.	                      +'uu_bld_count_2020',
-	46.	                      +'uu_bld_den_2020',
-	47.	                      +'ho_impr_housing_2015',
-	48.	                      +'fs_dist_hf_2019',
-	49.	                      +'po_hrsl_2018',
-	50.	                      +'po_wp_2020',
-	51.	                      +'ph_dist_riv_network_2007',
-	52.	                      +'uu_urb_bldg_2018',
-	53.	                      +'ses_dist_gov_office_2022'
+fs_dist_fs_2020
+fs_dist_school_2020
+in_dist_rd_2016
+in_dist_rd_intersect_2016
+in_dist_waterway_2016
+in_night_light_2016
+ph_base_water_2010
+ph_bio_dvst_2015
+ph_climate_risk_2020
+ph_dist_aq_veg_2015
+ph_dist_art_surface_2015
+ph_dist_bare_2015
+ph_dist_cultivated_2015
+ph_dist_herb_2015
+ph_dist_inland_water_2018
+ph_dist_open_coast_2020
+ph_dist_shrub_2015
+ph_dist_sparse_veg_2015
+ph_dist_woody_tree_2015
+ph_gdmhz_2005
+ph_grd_water_2000
+ph_hzd_index_2011
+ph_land_c1_2019
+ph_land_c2_2020
+ph_max_tem_2019
+ph_ndvi_2019
+ph_pm25_2016
+ph_slope_2000
+ses_an_visits_2014
+ses_child_stuned_2014
+ses_dtp3_2014
+ses_hf_delivery_2014
+ses_impr_water_src_2014
+ses_ITN_2014
+ses_m_lit_2014
+ses_measles_2014
+ses_odef_2014
+ses_pfpr_2017
+ses_preg_2017
+ses_unmet_need_2014
+ses_w_lit_2016
+sh_dist_mnr_pofw_2019
+sh_dist_pofw_2019
+sh_ethno_den_2020
+uu_bld_count_2020
+uu_bld_den_2020
+ho_impr_housing_2015
+fs_dist_hf_2019
+po_hrsl_2018
+po_wp_2020
+ph_dist_riv_network_2007
+uu_urb_bldg_2018
+ses_dist_gov_office_2022
