@@ -1,7 +1,7 @@
 import os
 import sys
 
-project_path = '/home/ubuntu/Cap2024'
+project_path = '/home/akhil/azuredev-4894'
 sys.path.append(project_path)
 
 from src.component.covariate import extract_by_point
