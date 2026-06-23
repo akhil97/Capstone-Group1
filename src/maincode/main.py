@@ -69,5 +69,5 @@ if __name__ == '__main__':
     merged_contextual_feature_file = os.path.join(base_dir, 'context/merged_all_feature.csv')
     bgrn_file = os.path.join(base_dir, 'raw_image/lagos_resampled_bgrn.csv')
     output_file = os.path.join(base_dir, 'combined_data/final_output_lagos_100m.csv')
-    merger = combined_data_1.CSVMerger(covariate_file, merged_contextual_feature_file, bgrn_file, output_file)
+    merger = combined_data.CSVMerger(covariate_file, merged_contextual_feature_file, bgrn_file, output_file)
     merger.merge_csvs_on_geometry()
