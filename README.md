@@ -140,3 +140,7 @@ g++
 
 ### 6. Data Pipeline Tree Overview
 <img width="489" alt="Screen Shot 2024-04-22 at 5 42 25 PM" src="https://github.com/akhil97/Capstone-Group1/assets/97569608/2d55a5cb-228e-448a-86d0-8f3445af3dcd">
+
+### 7. Mapping slum labels on QGIS for Lagos
+<img width="746" height="94" alt="image" src="https://github.com/user-attachments/assets/0fd9a6f3-0b85-4682-a266-ae5ebca940b3" />
+
